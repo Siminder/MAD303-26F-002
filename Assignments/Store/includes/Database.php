@@ -1,8 +1,13 @@
 <?php
     class Database {
         private $connection;
-        public function __construct($connection){
-            $this->connection = new PDO("mysql:host=".DB_HOST. ";dbname=".DB_NAME,DB_USER,DB_PASS);
+        public function __construct(){
+            $this->connection = new PDO(
+                "mysql:host=" . DB_HOST .
+                ";dbname=" . DB_NAME,
+                DB_USER,
+                DB_PASS );
+
         }
 
         public function sqlQuery($sql){
@@ -37,10 +42,9 @@
 
         }
 
-
     }
-
     $dbc = new Database();
+
 
 
 
