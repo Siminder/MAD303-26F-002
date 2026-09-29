@@ -8,19 +8,23 @@
     <title>Document</title>
 </head>
 <body>
-<h3>Deleting records Using Php</h3>
-<h4>Programmed by {Siminder Bansal}</h4>
 <?php
-    require_once('includes/bootstrap.php');
+    require_once("includes/bootstrap.php");
 
     $title = trim($_POST['Title']);
-    $result = Movies::delete($dbc, $title);
+    $director = trim($_POST['Director']);
+
+    $movie = Movies::find($dbc, $title);
+    $movie->setDirector($director);
+    $result = $movie->update($dbc);
 
     if($result){
-        echo "The Delete query was succesfully executed!";
+        echo "The UPDATE query was succesfully";
     } else {
-        echo "The Delete query could not be executed!";
+        echo "The UPDATE query was unsuccesfull";
     }
+
+
 
 
 

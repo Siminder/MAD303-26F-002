@@ -17,10 +17,10 @@
         <td align="center" valign="top"><b>YEAR RELEASED</b></td>
     </tr>
 
-
 <?php
 require_once('includes/bootstrap.php');
 $movies = Movies::all($dbc);
+
 
 if($movies) {
     foreach ($movies as $movie){
@@ -40,12 +40,45 @@ if($movies) {
 
 
 
+
+
+
+
+
+?>
+</table>
+
+<h2 style="text-align: center">Display Music Records </h2>
+<table border="1" width="75%" cellspacing="2" cellpadding="2" align="center"
+<tr>
+    <td align="center" valign="top"><b>TITLE</b></td>
+    <td align="center" valign="top"><b>Album</b></td>
+    <td align="center" valign="top"><b>PRODUCTION COMPANY</b></td>
+    <td align="center" valign="top"><b>YEAR RELEASED</b></td>
+</tr>
+<?php
+
+$musicRecords = Music::all($dbc);
+if($musicRecords) {
+    foreach ($musicRecords as $record){
+
+        echo "<tr align='center'>";
+        echo "<td align='center'>{$record['title']}</td>";
+        echo "<td align='center'>{$record['title']}</td>";
+        echo "<td align='center'>{$record['production_company']}</td>";
+        echo "<td align='center'>{$record['year_released']}</td>";
+        echo "</tr>";
+    };
+
+} else {
+    echo "<tr align='center'>";
+    echo "<td colspan='4'>No Results</td>";
+    echo "</tr>";
+}
 ?>
 
-
-
-
 </table>
+
 </body>
 </html>
 
