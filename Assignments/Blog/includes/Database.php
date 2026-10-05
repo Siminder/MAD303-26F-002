@@ -31,7 +31,7 @@ class Database{
 
     }
 
-    public function fetchArray($sql, $bindVal){
+    public function fetchArray($sql, $bindVal = null){
         $result = $this->sqlQuery($sql, $bindVal);
         if($result->rowCount() == 0){
             return false;
