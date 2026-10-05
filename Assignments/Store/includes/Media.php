@@ -4,7 +4,7 @@
         protected $title;
         protected $productionCompany;
 
-        protected $yearReleased;
+        public $yearReleased;
 
         /**
          * @return mixed
