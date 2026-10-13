@@ -43,5 +43,4 @@ class Database{
 
 }
 
-$dbc = new Database();
 ?>
