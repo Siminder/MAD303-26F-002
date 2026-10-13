@@ -12,9 +12,8 @@ if(isset($_POST['submit'])) {
 	$_POST['name'] = addslashes($_POST['name']);
 	$_POST['comment'] = addslashes($_POST['comment']);
 
-	$sql = "INSERT INTO comments (entry_id,date,name,comment) VALUES(" . $validId . ",NOW(),'" . $_POST['name'] . "','" . $_POST['comment'] . "');";
-	mysqli_query($db, $sql);
-
+	$comment = new Comment(0, $validId, 0, $_POST['name'], $_POST['comment']);
+    $comment->create();
 	header("Location: {$_SERVER['SCRIPT_NAME']}?id=$validId");
 } else {
 	$sql = "SELECT entries.*, categories.cat FROM entries, categories WHERE entries.cat_id = categories.id AND entries.id = " . $validId . " ORDER BY date DESC LIMIT 1;";
@@ -36,22 +35,18 @@ if(isset($_POST['submit'])) {
 
 
 	echo "<div id='comments'>";
-	$commsql = "SELECT * FROM comments WHERE entry_id = " . $validId . " ORDER BY date DESC;";
-	$commresult = mysqli_query($db, $commsql);
-	$numrows_comm = mysqli_num_rows($commresult);
+	$comments = Comment::find("SELECT * FROM `comments` WHERE entry_id = " . $validId . " ORDER BY date DESC,['vaildId' => $validId]);];");
 
-	if($numrows_comm == 0) {
-		echo "<p>No comments.</p>";
-	} else {
-		$i = 1;
-
-		while($commrow = mysqli_fetch_array($commresult, MYSQLI_ASSOC)) {
-			echo "<a name='comment" . $i . "'></a>\n";
-			echo "<p class='commenthead'>Comment by " . $commrow['name'] . " on " . date("D jS F Y g.iA", strtotime($commrow['date'])) . "</p>\n";
-			echo "<p class='commentbody'>" . $commrow['comment'] . "</p>\n";
-			$i++;
-		}
-	}
+    if(count($comments) == 0) {
+        echo "<p> NO comments </p>";
+    } else {
+        foreach($comments as $comment) {
+            echo "<a name='comment' . $comment->getId()></a>\n";
+            echo "<p class='commenthead'>Comment by </p>" . $comment->getName() . " on " .
+            date("D jS F Y g.iA", strtotime($comment->getDate())) . "<p />\n";
+            echo "<p class='commentbody'>" . $comment->getComment() . "</p>";
+        }
+    }
 	echo "</div>\n";
 
 	?>
