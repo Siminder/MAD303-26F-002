@@ -2,33 +2,22 @@
 require_once('includes/bootstrap.php');
 require_once('header.php');
 
+if(isset($_SESSION['submit'])) {
+    $user = User::auth($_POST['username'], $_POST['password']);
 
-if(isset($_POST['submit'])) {
-	$sql = "SELECT * FROM logins WHERE username ='" . $_POST['username'] ."'";
+    if($user) {
+        $session->login($user);
+        header("Location: index1.php");
 
-	$result = mysqli_query($db, $sql);
-	$numrows = mysqli_num_rows($result);
-
-	if($numrows == 1) {
-		$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-		if(password_verify($_POST['password'], $row['password'])) {
-			$_SESSION['USERNAME'] = $row['username'];
-			$_SESSION['USERID'] = $row['id'];
-
-			header("Location: index1.php");
-		} else {
-			header("Location: login.php?error=1");
-		}
-	} else {
-		header("Location: login.php?error=1");
-	}
-
+    } else {
+        header("Location: login.php?error=1");
+    }
 } else {
-	if(isset($_GET['error'])) {
-		echo "Incorrect login, please try  again!";
-
-	}
+  if(isset($_GET['error'])) {
+      echo "Incorrect login, please try again.";
+  }
 }
+
 ?>
 
 <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>" method="post">

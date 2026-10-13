@@ -3,7 +3,7 @@ require_once('includes/bootstrap.php');
 require_once('header.php');
 
 
-if(!isset($_SESSION['USERNAME'])) {
+if(!$session->isLoggedIn()) {
 	header("Location: index1.php");
 }
 

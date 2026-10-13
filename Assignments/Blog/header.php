@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 require_once('includes/bootstrap.php');
 $db = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME) or die('Could not connect to database');
 ?>
@@ -17,7 +17,7 @@ $db = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME) or die('Could not conne
 		<li><a href="viewcat.php">categories</a></li>
 		<li>
 			<?php
-			if(isset($_SESSION['USERNAME'])) {
+			if($session->isLoggedIn()) {
 				echo "<a href='logout.php'>log out</a>";
 			} else {
 				echo "<a href='login.php'>log in</a>";
@@ -25,7 +25,7 @@ $db = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME) or die('Could not conne
 			?>
 		</li>
 		<?php
-		if(isset($_SESSION['USERNAME'])) {
+		if($session->isLoggedIn()) {
 			echo "<li><a href='addentry.php'>add entry</a></li>";
 			echo "<li><a href='addcat.php'>add category</a></li>";
 		}
