@@ -1,6 +1,7 @@
 <?php
 /**
  * DataBase Class
+ *
  */
 
 class Database{
