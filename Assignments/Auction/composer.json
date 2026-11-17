@@ -1,0 +1,25 @@
+{
+  "name": "sbansal/auction",
+  "description": "Auction App",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Siminder Bansal",
+      "email": "w0654525@myssc.ca"
+    }
+  ],
+  "require": {
+    "monolog/monolog": "^3.0",
+    "ext-PDO": "*",
+    "ext-curl": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^12.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/",
+      "Tests\\": "tests/"
+    }
+  }
+}

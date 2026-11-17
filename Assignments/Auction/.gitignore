@@ -1,0 +1,12 @@
+# PhpStorm
+.idea/
+
+# Local configuration / secrets
+app/config/config.php
+
+# Composer
+/vendor/
+
+
+# Generated/user-uploaded images
+public/imgs/
